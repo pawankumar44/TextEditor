@@ -130,6 +130,31 @@ public class TextEditor implements ActionListener {
                 }
             }
         }
+        if(actionEvent.getSource()==saveFile){
+            //Initialize file picker
+            JFileChooser fileChooser = new JFileChooser("C:");
+            //Get choose option from file chooser
+            int chooseOption = fileChooser.showSaveDialog(null);
+            //check if we clicked on save button
+            if(chooseOption == JFileChooser.APPROVE_OPTION){
+                //Create a new file with chosen directory path and file name
+                File file = new File(fileChooser.getSelectedFile().getAbsolutePath()+".txt");
+                try{
+                    FileWriter fileWriter = new FileWriter(file);
+                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                    //Write contents of text area to file
+                    textArea.write(bufferedWriter);
+                    bufferedWriter.close();
+                }
+                catch (IOException ioException){
+                    ioException.printStackTrace();
+                }
+            }
+        }
+        //new window
+        if(actionEvent.getSource() == newFile){
+            TextEditor textEditor = new TextEditor();
+        }
     }
 
     public static void main(String[] args) {
