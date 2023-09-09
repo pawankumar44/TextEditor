@@ -8,7 +8,7 @@ import java.io.*;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class TextEditor implements ActionListener {
-    //Declaring the properties of text editor
+    //Declaring the properties of text editorr
     //JFrame is starting window in which we will create application
     JFrame frame;
     JMenuBar menuBar;
