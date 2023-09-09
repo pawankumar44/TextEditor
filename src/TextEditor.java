@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -96,6 +97,38 @@ public class TextEditor implements ActionListener {
         }
         if(actionEvent.getSource() == close){
             System.exit(0);
+        }
+
+        if(actionEvent.getSource()==openFile){
+            //open file chooser with starting directory path C:
+            JFileChooser fileChooser = new JFileChooser("C:");
+            int chooseOption = fileChooser.showOpenDialog(null);
+            //if we have clicked on open button
+            if(chooseOption == JFileChooser.APPROVE_OPTION){
+                //Getting selected file
+                File file = fileChooser.getSelectedFile();
+                //get the path of selected file
+                String filePath = file.getPath();
+                try{
+                    //Initialize file reader
+                    FileReader fileReader = new FileReader(filePath);
+                    //Initialize the buffer reader
+                    BufferedReader bufferedReader = new BufferedReader(fileReader);
+                    //create the contents of the file from the file
+                    //Intermediate string holding the content of the current line
+                    //output holds the complete string
+                    String intermediate = "", output = "";
+                    //Read contents of file line by line
+                    while ((intermediate = bufferedReader.readLine())!=null){
+                        output+=intermediate+"\n";
+                    }
+                    //set the output string to text area
+                    textArea.setText(output);
+                }
+                catch (IOException ioException){
+                    ioException.printStackTrace();
+                }
+            }
         }
     }
 
